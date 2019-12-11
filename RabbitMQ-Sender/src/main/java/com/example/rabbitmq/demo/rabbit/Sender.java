@@ -26,15 +26,15 @@ public class Sender {
 
     ///////////////////////// Send method ///////////////////
 
-    public void sendMessage(String routingKey, Object data) {
+    public void sendMessage(String exchange, String routingKey, Object data) {
         logger.info("Sending message to the queue using routingKey {}", routingKey);
-        rabbitTemplate.convertAndSend(routingKey, data);
+        rabbitTemplate.convertAndSend(exchange, routingKey, data);
         logger.info("The message has been sent to the queue.");
     }
 
     ///////////////////////// TEST ///////////////////
 
-    // envoie un message direct à la queue1
+    /*// envoie un message direct à la queue1
     @Scheduled(fixedRate = 5000)
     public void sendMessage1(){
         logger.info("Sending message to the queue using queue {}", "queue1");
@@ -50,7 +50,7 @@ public class Sender {
         logger.info("Notification stored in queue sucessfully");
     }
 
-    // envoie des messages a l'exchange 'direct', avec la clé de routage k4
+    // envoie des messages a l'exchange 'direct',à toutes les queues concerné par le routage k4
     @Scheduled(fixedRate = 5000)
     public void sendMessage3(){
         for (long index = 0; index < 5; index ++){
@@ -59,7 +59,7 @@ public class Sender {
             rabbitTemplate.convertAndSend(direct, "k4", foo);
             logger.info("Notification stored in queue sucessfully");
         }
-    }
+    }*/
 
 
 }

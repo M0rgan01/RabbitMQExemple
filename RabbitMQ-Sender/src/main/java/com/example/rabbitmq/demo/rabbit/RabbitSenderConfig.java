@@ -43,17 +43,22 @@ public class RabbitSenderConfig {
         return new Queue(queue3, true);
     }
 
+
+
     // -> FANOUT EXCHANGE : envoie le message à toutes les queues bindées à cette stratégie d'échange
     @Bean
     FanoutExchange fanout() {
         return new FanoutExchange(fanout);
     }
 
+
     // -> DIRECT EXCHANGE : envoie le message à toutes les queues qui ont la même routing key
     @Bean
     DirectExchange direct() {
         return new DirectExchange(direct);
     }
+
+
 
     // association d'une stratégie d'échange pour chaque queue
     @Bean
@@ -63,6 +68,7 @@ public class RabbitSenderConfig {
                 new Binding(queue2, Binding.DestinationType.QUEUE, fanout, "k3", null),
                 new Binding(queue3, Binding.DestinationType.QUEUE, direct, "k4", null));
     }
+
 
     @Bean
     public MessageConverter jsonMessageConverter() {

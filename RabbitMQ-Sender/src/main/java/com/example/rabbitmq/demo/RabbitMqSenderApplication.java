@@ -26,27 +26,10 @@ public class RabbitMqSenderApplication implements CommandLineRunner {
         SpringApplication.run(RabbitMqSenderApplication.class, args);
     }
 
-    @Bean
-    public JavaMailSender getJavaMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
-
-        mailSender.setUsername("test.application.java2");
-        mailSender.setPassword("Test1234!^^");
-
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "false");
-
-        return mailSender;
-    }
 
     @Override
     public void run(String... args) throws Exception {
-       // mailService.sendSimpleHTMLMessage("pichat.morgan@gmail.com", "test", "<h1><a href=\"#\">Titre lien</a></h1>");
+       mailService.sendSimpleHTMLMessage("pichat.morgan@gmail.com", "test", "<h1><a href=\"#\">Titre lien</a></h1>");
 
         //sender.sendMessage3();
     }
